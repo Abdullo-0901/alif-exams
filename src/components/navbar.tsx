@@ -1,148 +1,78 @@
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import MenuIcon from "@mui/icons-material/Menu";
-import { InputLabel } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import FormControl from "@mui/material/FormControl";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { Link } from "react-router-dom";
 
-const pages = [
-  {
-    id: 1,
-    path: "/",
-    name: "Home",
-  },
-  {
-    id: 2,
-    path: "/card",
-    name: "",
-  },
-];
-
 function Navbar() {
-  const [age, setAge] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
-  };
-
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   return (
-    <AppBar position="static">
+    <AppBar color="default" position="fixed">
       <Container maxWidth="xl">
         <Box>
           <Toolbar
             sx={{
               display: {
                 md: "flex",
+                gap: "7px",
                 justifyContent: "space-between",
                 alignItems: "center",
               },
             }}
           >
             <Link to={"/"}>
-              <img className="w-[60px]" src="/logo.svg" alt="" />
+              <img className="w-[100px]" src="/logo.svg" alt="" />
             </Link>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <Link to={page.path}>
-                        {page.name == "" ? <AddShoppingCartIcon /> : page.name}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
 
             <Box
               sx={{
                 flexGrow: 1,
-                display: { xs: "none", md: "flex", gap: "10px" },
+                display: {
+                  xs: "flex",
+                  gap: "10px",
+                  alignItems: "center",
+                },
                 justifyContent: "flex-end",
               }}
             >
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 140 }}>
-                <InputLabel id="demo-simple-select-standard-label">
-                  <span className="text-white"> Select product</span>
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  value={age}
-                  onChange={handleChange}
-                  label="Age"
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-
-              {pages.map((page) => (
+              <Box className="relative flex items-center overflow-hidden sm:w-[90%] md:w-[40%] pr-[60px]">
+                <input
+                  type="search"
+                  placeholder="Название товар или артакул"
+                  className="w-full border-gray-400 border-2 border-r-0 rounded-[5px_0_0_5px]    outline-yellow-500 h-[35px] p-[0_20px] "
+                />
                 <Button
-                  key={page.id}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{
+                    position: "absolute",
+                    right: "0",
+                    backgroundColor: "#eab308",
+                    height: "35px",
+                    borderRadius: "0px 5px 5px 0px",
+
+                    "&:hover": {
+                      backgroundColor: "orange",
+                    },
+                  }}
+                  className="bg-yellow-500"
+                  aria-label="Search"
                 >
-                  <Link to={page.path}>
-                    {page.name == "" ? <AddShoppingCartIcon /> : page.name}
-                  </Link>
+                  <img src="/search.svg" alt="" />
                 </Button>
-              ))}
+              </Box>
+
+              <Link
+                className=" items-center sm:hidden md:inline-flex justify-center 
+                 rounded-lg outline-none focus:outline-none  bg-transparent hover:text-yellow-500 active:text-yellow-600 py-2 px-3 text-sm flex-col text-smx text-gray-500 relative mt-0.5 !gap-0 !p-0 "
+                aria-label="Cart"
+                to="/cart"
+              >
+                <span>
+                  <img className="w-[20px]" src="/card.svg" alt="" />
+                </span>
+                <span className="text-[12px]" aria-label="Cart link">
+                  Корзина
+                </span>
+              </Link>
             </Box>
           </Toolbar>
         </Box>

@@ -1,5 +1,3 @@
-"use client";
-
 import { FC } from "react";
 import { ProductType } from "../interfaces";
 interface Props {
@@ -12,7 +10,7 @@ const CoustomImages: FC<Props> = ({ product, fill, isLoading }) => {
     <>
       {fill ? (
         <img
-          src={product.image}
+          src={product.images[0]}
           alt="product"
           className={`
     object-contain h-[150px] w-full duration-700  ease-in-out group-hover:opacity-75  ${
@@ -24,7 +22,7 @@ const CoustomImages: FC<Props> = ({ product, fill, isLoading }) => {
         />
       ) : (
         <img
-          src={product.image}
+          src={product.images[0]}
           alt="product"
           width={400}
           height={900}

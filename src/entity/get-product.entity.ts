@@ -4,7 +4,7 @@ import { GLOBALURL } from "../components";
 
 export const getProduct = async () => {
   try {
-    const response = await axios.get<ProductType[]>(`${GLOBALURL}/products`);
+    const response = await axios.get<ProductType[]>(`${GLOBALURL}products`);
 
     if (response.status == 200) {
       return response.data;
