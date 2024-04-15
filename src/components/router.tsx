@@ -1,8 +1,6 @@
-import { Home } from "@mui/icons-material";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import About from "../pages/about";
-import Layout from "../pages/layout";
-import NotFound from "../pages/not-foud";
+
+import { About, Card, Home, Layout, NotFound } from "../components/index";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <About />,
+      },
+      {
+        path: "card",
+        element: <Card />,
       },
       {
         path: "*",
