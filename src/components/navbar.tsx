@@ -1,11 +1,34 @@
+import { Badge } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ProductType } from "../interfaces";
 
 function Navbar() {
+  const [products, setProducts] = React.useState<ProductType[]>(
+    JSON.parse(localStorage.getItem("carts") as string) || []
+  );
+  useEffect(() => {
+    const handleAddToCart: EventListener = (event) => {
+      const newProduct = (event as CustomEvent).detail as
+        | ProductType
+        | undefined;
+      if (newProduct) {
+        setProducts((prevProducts) => [...prevProducts, newProduct]);
+      }
+    };
+
+    window.addEventListener("addToCart", handleAddToCart);
+
+    return () => {
+      window.removeEventListener("addToCart", handleAddToCart);
+    };
+  }, []);
+
   return (
     <AppBar color="default" position="fixed">
       <Container maxWidth="xl">
@@ -66,9 +89,11 @@ function Navbar() {
                 aria-label="Cart"
                 to="/cart"
               >
-                <span>
-                  <img className="w-[20px]" src="/card.svg" alt="" />
-                </span>
+                <Badge badgeContent={products.length} color="warning">
+                  <span>
+                    <img className="w-[20px]" src="/card.svg" alt="" />
+                  </span>
+                </Badge>
                 <span className="text-[12px]" aria-label="Cart link">
                   Корзина
                 </span>

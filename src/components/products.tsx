@@ -1,34 +1,41 @@
-"use client";
-
-import { FC } from "react";
-import { ProductType } from "../interfaces";
-import { Link } from "react-router-dom";
-import CoustomImages from "./images";
 import { Box, Button } from "@mui/material";
+import React, { FC, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ProductType } from "../interfaces";
+import { handleClick } from "./addtocard";
+import CoustomImages from "./images";
 
 const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
   product,
   isLoading,
 }) => {
+  const [products, setProducts] = React.useState<ProductType>(
+    JSON.parse(localStorage.getItem("carts") as string) || []
+  );
+
+  useEffect(() => {
+    setProducts(product);
+  }, [product]);
+
   return (
-    <Link
-      to={`product/${product.id}`}
-      className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200"
-    >
-      <Box className="relative max-h-80 flex-1 mb-5">
-        <CoustomImages product={product} isLoading={isLoading} />
-      </Box>
-      <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
-        {product.category.name}
-      </h3>
-      <Box className="font-semibold flex items-center justify-between mt-4 mb-1 ">
-        <h2 className="w-44  truncate">{product.title}</h2>
-        <p>${product.price}</p>
-      </Box>
-      <p className="leading-relaxed text-base line-clamp-2">
-        {product.description}
-      </p>
+    <Box className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200">
+      <Link to={`product/${product.id}`}>
+        <Box className="relative max-h-80 flex-1 mb-5">
+          <CoustomImages product={product} isLoading={isLoading} />
+        </Box>
+        <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
+          {product.category.name}
+        </h3>
+        <Box className="font-semibold flex items-center justify-between mt-4 mb-1 ">
+          <h2 className="w-44  truncate">{product.title}</h2>
+          <p>${product.price}</p>
+        </Box>
+        <p className="leading-relaxed text-base line-clamp-2">
+          {product.description}
+        </p>
+      </Link>
       <Button
+        onClick={() => handleClick({ product })}
         sx={{
           backgroundColor: "#eab308",
           display: "flex",
@@ -48,7 +55,7 @@ const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
           В корзину
         </span>
       </Button>
-    </Link>
+    </Box>
   );
 };
 
