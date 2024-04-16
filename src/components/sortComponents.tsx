@@ -23,8 +23,6 @@ const SortComponents: FC<{ data: ProductType[] }> = ({ data }) => {
       });
     };
 
-  const uniqueCategories = [...new Set(data.map((item) => item.category.name))];
-
   return (
     <Box
       sx={{
@@ -55,7 +53,13 @@ const SortComponents: FC<{ data: ProductType[] }> = ({ data }) => {
       <aside className="flex flex-col">
         <h1 className="mb-2 mt-5 font-mono font-bold">Бренд</h1>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-          {uniqueCategories.map((item) => (
+          {[
+            "Clothes",
+            "Electronics",
+            "Furniture",
+            "Shoes",
+            "Miscellaneous",
+          ].map((item, index) => (
             <div
               key={item}
               style={{ display: "flex", alignItems: "center", gap: "9px" }}

@@ -6,7 +6,6 @@ import "../App.css";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// Slickdots component receives props of type SlickdotsProps
 const Slickdots: FC<{ product?: ProductType }> = ({ product }) => {
   const [tab, setTab] = useState(0);
   const [swiper, setSwiper] = useState<any>(null);

@@ -27,9 +27,9 @@ const Home = () => {
   return (
     <Container maxWidth="xl">
       <section className="flex gap-5 mt-20 space-y-12 ">
-        {data.length != 0 && <SortComponents data={data} />}
+        <SortComponents data={data} />
         {isLoading ? (
-          <div className="grid grid-cols-1 gap-y-10 mt-20  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-8">
+          <div className="grid grid-cols-1 gap-y-10 mt-20  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8">
             {Array.from({ length: 16 }, (_, i) => i).map((_item) => (
               <div key={_item} className="flex flex-col gap-y-4">
                 <div className="relative max-h-80 flex-1 mb-5">
