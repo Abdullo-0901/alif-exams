@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ProductType } from "../interfaces";
 import CoustomImages from "../components/images";
+import { useDispatch } from "react-redux";
+import { productsCard } from "../store/marketSlice";
 
 const Card = () => {
+  const dispatch = useDispatch();
   const [total, setTotal] = React.useState<number>(0);
   const [products, setProducts] = React.useState<ProductType[]>(
     JSON.parse(localStorage.getItem("carts") as string) || []
@@ -15,6 +18,7 @@ const Card = () => {
     const updateCart = products.filter((product) => product.id !== id);
     localStorage.setItem("carts", JSON.stringify(updateCart));
     setProducts(updateCart);
+    dispatch(productsCard(updateCart));
   };
 
   const handleIncrement = (id: number) => {
@@ -35,7 +39,7 @@ const Card = () => {
     const existProduct = products.find((product) => product.id === id);
     if (existProduct?.quantity == 1) {
       removeProduct(id);
-      toast(`Remove this product`);
+      toast.success(`Remove this product`);
     } else {
       const updateCart = products.map((product) => {
         if (product.id === id) {
@@ -146,11 +150,16 @@ const Card = () => {
                       <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                         <div className="flex items-center border-gray-100">
                           <span
-                            onClick={() => handleDecrement(c.id)}
-                            className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                            onClick={() =>
+                              c.quantity < 2 ? "" : handleDecrement(c.id)
+                            }
+                            className={`${
+                              c.quantity < 2
+                                ? "opacity-40 cursor-not-allowed"
+                                : "opacity-1"
+                            } cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50`}
                           >
-                            {" "}
-                            -{" "}
+                            -
                           </span>
                           <input
                             className="h-8 w-8 border bg-white text-center text-xs outline-none"

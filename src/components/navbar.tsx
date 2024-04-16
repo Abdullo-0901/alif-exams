@@ -12,6 +12,7 @@ import { RootState } from "../store/store";
 function Navbar() {
   const dispatch = useDispatch();
   const title = useSelector((state: RootState) => state.market.qtitle);
+  const produc = useSelector((state: RootState) => state.market.products);
 
   return (
     <AppBar
@@ -84,7 +85,7 @@ function Navbar() {
                 aria-label="Cart"
                 to="/cart"
               >
-                <Badge badgeContent={2} color="warning">
+                <Badge badgeContent={produc.length} color="warning">
                   <span>
                     <img className="w-[20px]" src="/card.svg" alt="" />
                   </span>

@@ -3,12 +3,16 @@ import { ProductType } from "../interfaces";
 import { GLOBALURL } from "../components";
 import { toast } from "react-toastify";
 
-export const getProduct = async (title: string) => {
+export const getProduct = async (
+  title: string,
+  price_min: number,
+  price_max: number
+) => {
   console.log(title);
 
   try {
     const response = await axios.get<ProductType[]>(
-      `${GLOBALURL}products?title=${title}`
+      `${GLOBALURL}products?title=${title}&price_min=${price_min}&price_max=${price_max}`
     );
     console.log(response.data);
 

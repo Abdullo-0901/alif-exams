@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import { ProductType } from "../interfaces";
 import { handleClick } from "./addtocard";
 import CoustomImages from "./images";
+import { useDispatch } from "react-redux";
 
 const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
   product,
 }) => {
+  const dispatch = useDispatch();
   return (
     <Box className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200">
       <Link to={`product/${product.id}`}>
@@ -26,7 +28,7 @@ const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
         </p>
       </Link>
       <Button
-        onClick={() => handleClick({ product })}
+        onClick={() => handleClick({ product, dispatch })}
         sx={{
           backgroundColor: "#eab308",
           display: "flex",

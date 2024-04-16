@@ -5,16 +5,18 @@ import { toast } from "react-toastify";
 import Product from "../components/products";
 import SortComponents from "../components/sortComponents";
 import { getProduct } from "../entity/get-product.entity";
-import { RootState } from "../store/store";
 import { queryTitle } from "../store/marketSlice";
+import { RootState } from "../store/store";
 
 const Home = () => {
   const dispatch = useDispatch();
   const title = useSelector((state: RootState) => state.market.qtitle);
+  const price_min = useSelector((state: RootState) => state.market.price_min);
+  const price_max = useSelector((state: RootState) => state.market.price_max);
 
   const { data = [], isLoading } = useQuery(
-    ["getcategory", title],
-    () => getProduct(title),
+    ["getcategory", title, price_min, price_max],
+    () => getProduct(title, price_min, price_max),
     {
       onError: (err) => {
         toast.error((err as any).response.data.message);

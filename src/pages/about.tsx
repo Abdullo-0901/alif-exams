@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import { handleClick } from "../components/addtocard";
 import Slickdots from "../components/slickdots";
 import { getProductById } from "../entity/get-product-byid.entity";
+import { useDispatch } from "react-redux";
 
 function About() {
   const { id } = useParams();
   const { data } = useQuery(["product", id], () => getProductById(Number(id)));
+  const dispatch = useDispatch();
 
   return (
     <Container maxWidth="xl" className="pt-[80px]">
@@ -47,7 +49,7 @@ function About() {
               {data?.description}
             </div>
             <Button
-              onClick={() => handleClick({ product: data })}
+              onClick={() => handleClick({ product: data, dispatch })}
               sx={{
                 backgroundColor: "#eab308",
                 display: "flex",
