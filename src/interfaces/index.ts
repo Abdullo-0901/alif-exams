@@ -6,6 +6,7 @@ export interface ProductType {
   images: string[];
   creationAt: string;
   updatedAt: string;
+  quantity: number;
   category: Category;
 }
 

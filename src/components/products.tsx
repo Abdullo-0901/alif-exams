@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import CoustomImages from "./images";
 import { Box, Button } from "@mui/material";
 
-// eslint-disable-next-line @next/next/no-async-client-component
 const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
   product,
   isLoading,
@@ -17,7 +16,7 @@ const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
       className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200"
     >
       <Box className="relative max-h-80 flex-1 mb-5">
-        <CoustomImages product={product} isLoading={isLoading} fill />
+        <CoustomImages product={product} isLoading={isLoading} />
       </Box>
       <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
         {product.category.name}
