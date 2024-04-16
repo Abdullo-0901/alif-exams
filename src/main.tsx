@@ -1,9 +1,11 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import App from "./App.tsx";
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "react-query";
+import store from "./store/store.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,8 +15,10 @@ const queryClient = new QueryClient({
   },
 });
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <QueryClientProvider client={queryClient}>
-    <ToastContainer autoClose={1500} position="top-center" />
-    <App />
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <ToastContainer autoClose={1500} position="top-center" />
+      <App />
+    </QueryClientProvider>
+  </Provider>
 );

@@ -7,13 +7,12 @@ import CoustomImages from "./images";
 
 const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
   product,
-  isLoading,
 }) => {
   return (
     <Box className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200">
       <Link to={`product/${product.id}`}>
         <Box className="relative max-h-80 flex-1 mb-5">
-          <CoustomImages product={product} isLoading={isLoading} />
+          <CoustomImages product={product} />
         </Box>
         <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
           {product.category.name}

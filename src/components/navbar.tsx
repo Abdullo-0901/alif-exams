@@ -4,33 +4,26 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
-import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ProductType } from "../interfaces";
+import { queryTitle } from "../store/marketSlice";
+import { RootState } from "../store/store";
 
 function Navbar() {
-  const [products, setProducts] = React.useState<ProductType[]>(
-    JSON.parse(localStorage.getItem("carts") as string) || []
-  );
-  useEffect(() => {
-    const handleAddToCart: EventListener = (event) => {
-      const newProduct = (event as CustomEvent).detail as
-        | ProductType
-        | undefined;
-      if (newProduct) {
-        setProducts((prevProducts) => [...prevProducts, newProduct]);
-      }
-    };
-
-    window.addEventListener("addToCart", handleAddToCart);
-
-    return () => {
-      window.removeEventListener("addToCart", handleAddToCart);
-    };
-  }, []);
+  const dispatch = useDispatch();
+  const title = useSelector((state: RootState) => state.market.qtitle);
 
   return (
-    <AppBar color="default" position="fixed">
+    <AppBar
+      sx={{
+        height: "90px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+      color="default"
+      position="fixed"
+    >
       <Container maxWidth="xl">
         <Box>
           <Toolbar
@@ -44,7 +37,7 @@ function Navbar() {
             }}
           >
             <Link to={"/"}>
-              <img className="w-[100px]" src="/logo.svg" alt="" />
+              <img className="w-[130px]" src="/logo.svg" alt="" />
             </Link>
 
             <Box
@@ -61,6 +54,8 @@ function Navbar() {
               <Box className="relative flex items-center overflow-hidden sm:w-[90%] md:w-[40%] pr-[60px]">
                 <input
                   type="search"
+                  value={title}
+                  onChange={(e) => dispatch(queryTitle(e.target.value))}
                   placeholder="Название товар или артакул"
                   className="w-full border-gray-400 border-2 border-r-0 rounded-[5px_0_0_5px]    outline-yellow-500 h-[35px] p-[0_20px] "
                 />
@@ -89,7 +84,7 @@ function Navbar() {
                 aria-label="Cart"
                 to="/cart"
               >
-                <Badge badgeContent={products.length} color="warning">
+                <Badge badgeContent={2} color="warning">
                   <span>
                     <img className="w-[20px]" src="/card.svg" alt="" />
                   </span>
