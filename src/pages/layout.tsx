@@ -1,54 +1,15 @@
+import HomeIcon from "@mui/icons-material/Home";
+import { Container } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "../components/navbar";
-import { Box, Container } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
 
 const Layout = () => {
   return (
     <section>
       <Navbar />
       <Container maxWidth="xl">
-        <Box sx={{ display: "flex", gap: "20px" }}>
-          <Box
-            sx={{
-              marginTop: "150px",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <aside className="flex flex-col">
-              <h1 className="mb-2">Цена</h1>
-              <Box sx={{ display: "flex", gap: "15px" }}>
-                <input
-                  type="text"
-                  placeholder="от 10$"
-                  className=" border-gray-400 border-[1px] text-[14px]  rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
-                />
-                <input
-                  type="text"
-                  placeholder="до 550$"
-                  className=" border-gray-400 border-[1px]  text-[14px] rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
-                />
-              </Box>
-            </aside>
-            <aside className="flex flex-col">
-              <h1 className="mb-2 mt-5">Бренд</h1>
-              <Box sx={{ display: "flex", gap: "15px" }}>
-                <input
-                  type="text"
-                  placeholder="от 10$"
-                  className=" border-gray-400 border-[1px] text-[14px]  rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
-                />
-                <input
-                  type="text"
-                  placeholder="до 550$"
-                  className=" border-gray-400 border-[1px]  text-[14px] rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
-                />
-              </Box>
-            </aside>
-          </Box>
-          <Outlet />
-        </Box>
+        <Outlet />
+
         <footer className="flex justify-between items-center">
           <Link to={"/"}>
             <HomeIcon />

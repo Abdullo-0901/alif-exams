@@ -4,7 +4,7 @@ import { FC } from "react";
 import { ProductType } from "../interfaces";
 import { Link } from "react-router-dom";
 import CoustomImages from "./images";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
@@ -29,6 +29,26 @@ const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
       <p className="leading-relaxed text-base line-clamp-2">
         {product.description}
       </p>
+      <Button
+        sx={{
+          backgroundColor: "#eab308",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          marginTop: "5px",
+
+          "&:hover": {
+            backgroundColor: "orange",
+          },
+        }}
+      >
+        <span>
+          <img className="w-[20px]" src="/card.svg" alt="" />
+        </span>
+        <span className="!text-[12px] text-black" aria-label="Cart link">
+          В корзину
+        </span>
+      </Button>
     </Link>
   );
 };

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import Product from "../components/products";
 import { getProduct } from "../entity/get-product.entity";
+import SortComponents from "../components/sortComponents";
 
 const Home = () => {
   const { data = [], isLoading } = useQuery(
@@ -14,23 +15,19 @@ const Home = () => {
       },
     }
   );
-  {
-    isLoading && <h1>Loading...</h1>;
-  }
 
   return (
-    <section className="flex flex-col space-y-12 ">
-      <h1 className="text-5xl font-bold text-center ">Abdulloh Shop</h1>
-
+    <section className="flex gap-5 mt-10 space-y-12 ">
+      <SortComponents data={data} />
       <div className="grid grid-cols-1 gap-y-10  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8">
         {isLoading
-          ? Array.from({ length: 4 }, (_, i) => i).map((_item) => (
+          ? Array.from({ length: 16 }, (_, i) => i).map((_item) => (
               <div key={_item} className="flex flex-col gap-y-4">
                 <div className="relative max-h-80 flex-1 mb-5">
                   <Skeleton
                     variant="rectangular"
                     className="rounded-2xl"
-                    width={350}
+                    width={250}
                     height={150}
                   />
                 </div>
