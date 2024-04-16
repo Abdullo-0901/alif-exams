@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { FC, useEffect } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { ProductType } from "../interfaces";
 import { handleClick } from "./addtocard";
@@ -9,14 +9,6 @@ const Product: FC<{ product: ProductType; isLoading: boolean }> = ({
   product,
   isLoading,
 }) => {
-  const [products, setProducts] = React.useState<ProductType>(
-    JSON.parse(localStorage.getItem("carts") as string) || []
-  );
-
-  useEffect(() => {
-    setProducts(product);
-  }, [product]);
-
   return (
     <Box className=" h-96 flex flex-col p-6 rounded-lg border group hover:scale-105 transition-transform ease-in-out duration-200">
       <Link to={`product/${product.id}`}>

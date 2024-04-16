@@ -1,15 +1,13 @@
 import { Box, Button, Container, Rating, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { handleClick } from "../components/addtocard";
 import Slickdots from "../components/slickdots";
 import { getProductById } from "../entity/get-product-byid.entity";
-import { handleClick } from "../components/addtocard";
 
 function About() {
   const { id } = useParams();
-  const { data, isLoading } = useQuery(["product", id], () =>
-    getProductById(Number(id))
-  );
+  const { data } = useQuery(["product", id], () => getProductById(Number(id)));
 
   return (
     <Container maxWidth="xl" className="pt-[80px]">
