@@ -1,11 +1,32 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import CoustomImages from "../components/images";
 import { ProductType } from "../interfaces";
-import { productsCard } from "../store/marketSlice";
+import { openModal, productsCard } from "../store/marketSlice";
+import { RootState } from "../store/store";
+import Contact from "../components/contact";
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 560,
+  bgcolor: "background.paper",
+  border: "2px solid transparent",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Card = () => {
   const dispatch = useDispatch();
@@ -13,6 +34,7 @@ const Card = () => {
   const [products, setProducts] = React.useState<ProductType[]>(
     JSON.parse(localStorage.getItem("carts") as string) || []
   );
+  const modal = useSelector((state: RootState) => state.market.modal);
 
   const removeProduct = (id: number) => {
     const updateCart = products.filter((product) => product.id !== id);
@@ -296,6 +318,7 @@ const Card = () => {
                   </div>
                 </Box>
                 <Button
+                  onClick={() => dispatch(openModal(true))}
                   sx={{
                     backgroundColor: "#eab308",
                     marginTop: "20px",
@@ -316,6 +339,16 @@ const Card = () => {
           </div>
         </Box>
       )}
+      <Modal
+        aria-labelledby="unstyled-modal-title"
+        aria-describedby="unstyled-modal-description"
+        open={modal}
+        onClose={() => dispatch(openModal(false))}
+      >
+        <Box sx={style}>
+          <Contact />
+        </Box>
+      </Modal>
     </Container>
   );
 };

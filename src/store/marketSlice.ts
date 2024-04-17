@@ -10,6 +10,9 @@ export interface MarketState {
   price_min: number;
   price_max: number;
   categoryId: number;
+  modal: boolean;
+  // phoneNumber: number;
+  // addres: string;
 }
 
 const initialState: MarketState = {
@@ -18,6 +21,7 @@ const initialState: MarketState = {
   price_max: 0,
   price_min: 0,
   categoryId: 0,
+  modal: false,
 };
 
 const marketSlice = createSlice({
@@ -41,10 +45,19 @@ const marketSlice = createSlice({
     productsCard(state, action: PayloadAction<ProductType[]>) {
       state.products = action.payload;
     },
+    openModal(state, action: PayloadAction<boolean>) {
+      state.modal = action.payload;
+    },
   },
 });
 
-export const { queryTitle, maxPrice, minPrice, setCategoryId, productsCard } =
-  marketSlice.actions;
+export const {
+  queryTitle,
+  maxPrice,
+  minPrice,
+  setCategoryId,
+  productsCard,
+  openModal,
+} = marketSlice.actions;
 
 export default marketSlice.reducer;
