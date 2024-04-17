@@ -13,10 +13,11 @@ const Home = () => {
   const title = useSelector((state: RootState) => state.market.qtitle);
   const price_min = useSelector((state: RootState) => state.market.price_min);
   const price_max = useSelector((state: RootState) => state.market.price_max);
+  const categoryId = useSelector((state: RootState) => state.market.categoryId);
 
   const { data = [], isLoading } = useQuery(
-    ["getcategory", title, price_min, price_max],
-    () => getProduct(title, price_min, price_max),
+    ["getcategory", title, price_min, price_max, categoryId],
+    () => getProduct(title, price_min, price_max, categoryId),
     {
       onError: (err) => {
         toast.error((err as any).response.data.message);
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <Container maxWidth="xl">
       <section className="flex gap-5 mt-20 space-y-12 ">
-        <SortComponents data={data} />
+        <SortComponents />
         {isLoading ? (
           <div className="grid grid-cols-1 gap-y-10 mt-20  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8">
             {Array.from({ length: 16 }, (_, i) => i).map((_item) => (

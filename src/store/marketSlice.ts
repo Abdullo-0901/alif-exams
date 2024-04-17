@@ -9,6 +9,7 @@ export interface MarketState {
   qtitle: string;
   price_min: number;
   price_max: number;
+  categoryId: number;
 }
 
 const initialState: MarketState = {
@@ -16,6 +17,7 @@ const initialState: MarketState = {
   qtitle: "",
   price_max: 0,
   price_min: 0,
+  categoryId: 0,
 };
 
 const marketSlice = createSlice({
@@ -31,13 +33,16 @@ const marketSlice = createSlice({
     minPrice(state, action: PayloadAction<number>) {
       state.price_min = action.payload;
     },
+    setCategoryId(state, action: PayloadAction<number>) {
+      state.categoryId = action.payload;
+    },
     productsCard(state, action: PayloadAction<ProductType[]>) {
       state.products = action.payload;
     },
   },
 });
 
-export const { queryTitle, maxPrice, minPrice, productsCard } =
+export const { queryTitle, maxPrice, minPrice, setCategoryId, productsCard } =
   marketSlice.actions;
 
 export default marketSlice.reducer;
