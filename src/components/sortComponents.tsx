@@ -59,7 +59,7 @@ const SortComponents: FC<{ data: ProductType[] }> = ({ data }) => {
             "Furniture",
             "Shoes",
             "Miscellaneous",
-          ].map((item, index) => (
+          ].map((item) => (
             <div
               key={item}
               style={{ display: "flex", alignItems: "center", gap: "9px" }}

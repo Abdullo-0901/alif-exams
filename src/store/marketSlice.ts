@@ -3,7 +3,6 @@ import { ProductType } from "../interfaces";
 
 const products: ProductType[] =
   JSON.parse(localStorage.getItem("carts") as string) || [];
-console.log(products);
 
 export interface MarketState {
   products: ProductType[];
