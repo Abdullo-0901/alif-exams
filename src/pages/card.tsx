@@ -1,20 +1,13 @@
-import {
-  Box,
-  Button,
-  Container,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Modal, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Contact from "../components/contact";
 import CoustomImages from "../components/images";
 import { ProductType } from "../interfaces";
 import { openModal, productsCard } from "../store/marketSlice";
 import { RootState } from "../store/store";
-import Contact from "../components/contact";
 
 const style = {
   position: "absolute" as "absolute",

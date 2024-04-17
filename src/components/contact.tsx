@@ -1,14 +1,15 @@
 import { Box, Button } from "@mui/material";
-import { sendMessage } from "./sendMessageToTelegram";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { ProductType } from "../interfaces";
+import { sendMessage } from "./sendMessageToTelegram";
 
 const Contact = () => {
   const [adres, setAdres] = useState("");
   const [phoneNumber, setPhoneNumber] = useState<number>();
-  const product = useSelector((state: RootState) => state.market.products);
+  const [product] = React.useState<ProductType[]>(
+    JSON.parse(localStorage.getItem("carts") as string) || []
+  );
   const dispatch = useDispatch();
   return (
     <Box>
