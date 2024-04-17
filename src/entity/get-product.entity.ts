@@ -9,7 +9,6 @@ export const getProduct = async (
   price_max: number,
   categoryId: number
 ) => {
-  console.log(title);
   try {
     const response = await axios.get<ProductType[]>(
       `${GLOBALURL}products?title=${title}&price_min=${price_min}&price_max=${price_max}&categoryId=${categoryId}`

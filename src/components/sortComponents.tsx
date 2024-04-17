@@ -1,14 +1,10 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { maxPrice, minPrice, setCategoryId } from "../store/marketSlice";
-import { RootState } from "../store/store";
 
 const SortComponents = () => {
   const dispatch = useDispatch();
-  const price_min = useSelector((state: RootState) => state.market.price_min);
-  const price_max = useSelector((state: RootState) => state.market.price_max);
-
   const [clothesChecked, setClothesChecked] = useState<boolean>(false);
   const [electronicsChecked, setElectronicsChecked] = useState<boolean>(false);
   const [furnitureChecked, setFurnitureChecked] = useState<boolean>(false);
@@ -18,7 +14,11 @@ const SortComponents = () => {
 
   const handleClothesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClothesChecked(event.target.checked);
-    dispatch(setCategoryId(1));
+
+    {
+      !clothesChecked ? dispatch(setCategoryId(1)) : dispatch(setCategoryId(0));
+    }
+
     if (event.target.checked) {
       setElectronicsChecked(false);
       setFurnitureChecked(false);
@@ -31,7 +31,12 @@ const SortComponents = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setElectronicsChecked(event.target.checked);
-    dispatch(setCategoryId(2));
+
+    {
+      !electronicsChecked
+        ? dispatch(setCategoryId(2))
+        : dispatch(setCategoryId(0));
+    }
     if (event.target.checked) {
       setClothesChecked(false);
       setFurnitureChecked(false);
@@ -44,7 +49,12 @@ const SortComponents = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFurnitureChecked(event.target.checked);
-    dispatch(setCategoryId(3));
+
+    {
+      !furnitureChecked
+        ? dispatch(setCategoryId(3))
+        : dispatch(setCategoryId(0));
+    }
     if (event.target.checked) {
       setClothesChecked(false);
       setElectronicsChecked(false);
@@ -55,7 +65,10 @@ const SortComponents = () => {
 
   const handleShoesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShoesChecked(event.target.checked);
-    dispatch(setCategoryId(4));
+
+    {
+      !shoesChecked ? dispatch(setCategoryId(4)) : dispatch(setCategoryId(0));
+    }
     if (event.target.checked) {
       setClothesChecked(false);
       setElectronicsChecked(false);
@@ -68,7 +81,12 @@ const SortComponents = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setMiscellaneousChecked(event.target.checked);
-    dispatch(setCategoryId(5));
+
+    {
+      !miscellaneousChecked
+        ? dispatch(setCategoryId(5))
+        : dispatch(setCategoryId(0));
+    }
     if (event.target.checked) {
       setClothesChecked(false);
       setElectronicsChecked(false);
@@ -90,14 +108,12 @@ const SortComponents = () => {
         <Box sx={{ display: "flex", gap: "15px" }}>
           <input
             type="text"
-            value={price_min}
             onChange={(e) => dispatch(minPrice(Number(e.target.value)))}
             placeholder="от 10$"
             className=" border-gray-400 border-[1px] text-[14px]  rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
           />
           <input
             type="text"
-            value={price_max}
             onChange={(e) => dispatch(maxPrice(Number(e.target.value)))}
             placeholder="до 550$"
             className=" border-gray-400 border-[1px]  text-[14px] rounded-[5px]    outline-yellow-500  w-[100px] p-[2px_6px]"
@@ -105,7 +121,7 @@ const SortComponents = () => {
         </Box>
       </aside>
 
-      <aside className="flex flex-col">
+      <aside className="flex flex-col ">
         <h1 className="mb-2 mt-5 font-mono font-bold">Бренд</h1>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
@@ -117,6 +133,7 @@ const SortComponents = () => {
             />
             <span className="text-[15px] font-serif">Clothes</span>
           </div>
+
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
             <input
               type="checkbox"
@@ -126,6 +143,7 @@ const SortComponents = () => {
             />
             <span className="text-[15px] font-serif">Electronics</span>
           </div>
+
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
             <input
               type="checkbox"
@@ -135,6 +153,7 @@ const SortComponents = () => {
             />
             <span className="text-[15px] font-serif">Furniture</span>
           </div>
+
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
             <input
               type="checkbox"
@@ -144,6 +163,7 @@ const SortComponents = () => {
             />
             <span className="text-[15px] font-serif">Shoes</span>
           </div>
+
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
             <input
               type="checkbox"

@@ -24,6 +24,7 @@ const Home = () => {
       },
     }
   );
+  console.log(data);
 
   return (
     <Container maxWidth="xl">

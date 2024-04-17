@@ -34,6 +34,8 @@ const marketSlice = createSlice({
       state.price_min = action.payload;
     },
     setCategoryId(state, action: PayloadAction<number>) {
+      console.log(action.payload);
+
       state.categoryId = action.payload;
     },
     productsCard(state, action: PayloadAction<ProductType[]>) {

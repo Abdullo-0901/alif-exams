@@ -1,10 +1,10 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ProductType } from "../interfaces";
 import CoustomImages from "../components/images";
-import { useDispatch } from "react-redux";
+import { ProductType } from "../interfaces";
 import { productsCard } from "../store/marketSlice";
 
 const Card = () => {
@@ -119,10 +119,31 @@ const Card = () => {
           </Box>
         </Box>
       ) : (
-        <div className="">
-          <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
+        <Box sx={{ marginTop: "126px" }}>
           <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
             <div className="rounded-lg md:w-2/3">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: "20px 0",
+                }}
+              >
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: "20px" }}
+                >
+                  <Typography variant="h5">Корзина</Typography>
+                  <Typography variant="body2">
+                    <span className="text-gray-400">
+                      {products.length} товаров
+                    </span>
+                  </Typography>
+                </Box>
+                <div className="cursor-pointer text-[#7fa4c5]">
+                  Очистить корзину
+                </div>
+              </Box>
               {products.map((c) => {
                 return (
                   <div
@@ -205,45 +226,95 @@ const Card = () => {
                 );
               })}
             </div>
-            <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-              <div className="mb-2 flex justify-between">
-                <p className="text-gray-700">Subtotal</p>
-                <p className="text-gray-700">
-                  {total.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
-                </p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-gray-700">Shipping</p>
-                <p className="text-gray-700">
-                  {" "}
-                  {(10).toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
-                </p>
-              </div>
-              <hr className="my-4" />
-              <div className="flex justify-between">
-                <p className="text-lg font-bold">Total</p>
-                <div className="">
-                  <p className="mb-1 text-lg font-bold">
-                    {(total + total * 0.1).toLocaleString("en-US", {
+            <Box
+              className="mt-6 h-full md:w-1/3"
+              position={"sticky"}
+              top={"105px"}
+            >
+              <Typography
+                variant="body2"
+                sx={{ marginBottom: "10px", color: "#9ca3b7" }}
+              >
+                Способ оплаты
+              </Typography>
+              <Box className="rounded-lg border bg-white p-6 shadow-md md:mt-0 ">
+                <Box className="mb-2 flex justify-between">
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    Товары ({products.length})
+                    .....................................
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    {total.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
                     })}
-                  </p>
-                  <p className="text-sm text-gray-700">including VAT</p>
-                </div>
-              </div>
-              <button className="mt-6 w-full rounded-md bg-blue-500 py-4 font-medium *: text-blue-50 hover:bg-blue-600">
-                Check out
-              </button>
-            </div>
+                  </Typography>
+                </Box>
+                <Box className="mb-2 flex justify-between">
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    Скидка ............................................
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    {(5).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Typography>
+                </Box>
+                <Box className="mb-2 flex justify-between">
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    Общая сумма доставки ........................
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    $0
+                  </Typography>
+                </Box>
+                <Box className="mb-2 flex justify-between">
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    Комиссия за товары ({products.length}) .................
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "#9ca3b7" }}>
+                    {(total / 6).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Typography>
+                </Box>
+
+                <hr className="my-4" />
+                <Box className="flex justify-between items-center">
+                  <Typography variant="h5" className="text-lg font-bold">
+                    Итого
+                  </Typography>
+                  <div className="">
+                    <Typography className="mb-1 text-lg font-bold">
+                      {(total - total / 5).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    </Typography>
+                  </div>
+                </Box>
+                <Button
+                  sx={{
+                    backgroundColor: "#eab308",
+                    marginTop: "20px",
+                    borderRadius: "10px",
+                    width: "100%",
+                    padding: "10px 15px",
+                    "&:hover": {
+                      backgroundColor: "orange",
+                    },
+                  }}
+                  className="bg-yellow-500"
+                  aria-label="Search"
+                >
+                  Перейти к оформлению
+                </Button>
+              </Box>
+            </Box>
           </div>
-        </div>
+        </Box>
       )}
     </Container>
   );
