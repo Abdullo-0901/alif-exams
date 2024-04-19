@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Product from "../components/products";
 import SortComponents from "../components/sortComponents";
 import { getProduct } from "../entity/get-product.entity";
-import { queryTitle } from "../store/marketSlice";
+import { maxPrice, minPrice, queryTitle } from "../store/marketSlice";
 import { RootState } from "../store/store";
 
 const Home = () => {
@@ -96,7 +96,11 @@ const Home = () => {
                     <span>Мы делаем все, чтобы это исправить</span>
 
                     <Button
-                      onClick={() => dispatch(queryTitle(""))}
+                      onClick={() => {
+                        dispatch(queryTitle("")),
+                        dispatch(maxPrice(0))
+                        dispatch(minPrice(0))
+                      }}
                       sx={{
                         backgroundColor: "#eab308",
                         display: "flex",

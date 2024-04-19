@@ -49,7 +49,8 @@ export const sendMessage = async ({
 
     if (response.ok) {
       dispatch(openModal(false));
-      toast.success("Успешно отправленно");
+      
+      toast.success("Успешно отправленно")
     } else {
       toast.error(await response.text());
       throw new Error("Server error");
